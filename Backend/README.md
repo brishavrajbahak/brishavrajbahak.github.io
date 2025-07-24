@@ -1,5 +1,5 @@
 // README.md
-# Brishav Rajbahak - GTA 6 Style Portfolio Backend
+# Brishav Rajbahak -
 
 A cyberpunk-inspired backend API for a futuristic portfolio website, built with Node.js, Express, and MongoDB.
 
