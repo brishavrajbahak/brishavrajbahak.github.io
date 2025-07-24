@@ -468,6 +468,12 @@
                 opacity: 0;
             }
         }
+             .icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain; /* Ensures it doesn’t stretch weirdly */
+  }
+
     </style>
 </head>
 <body>
@@ -584,11 +590,18 @@
     </section>
 
     <footer>
-        <div class="social-links">
-            <a href="#">GitHub</a>
-            <a href="https://www.linkedin.com/public-profile/settings?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_self_edit_contact-info%3BxR1q6MrAQ%2FWjMu5mhT2gTQ%3D%3D">LinkedIn</a>
-            <a href="#">Twitter</a>
-            <a href="https://www.instagram.com/razzbahakbrishav?igsh=MTU5OWR0ZjZ3bXFxcQ==">Instagram</a>
+          <div class="social-links">
+            <a href="#">
+                <img src="github.png" alt="settings" class="icon">
+            </a>
+            <a href="https://www.linkedin.com/public-profile/settings?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_self_edit_contact-info%3BxR1q6MrAQ%2FWjMu5mhT2gTQ%3D%3D">
+
+                <img src="linkedin.png" alt="settings" class="icon">
+            </a>
+                    
+            <a href="https://www.instagram.com/razzbahakbrishav?igsh=MTU5OWR0ZjZ3bXFxcQ==">
+                <img src="instagram-icon.png" alt="settings" class="icon">
+            </a>
         </div>
         <p>&copy; 2025 Brishav Rajbahak. All rights reserved. | Built in the digital underground.</p>
     </footer>
