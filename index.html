@@ -7,26 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 
-  <!-- ╔══════════════════════════════════════════════╗
-       ║  EMAILJS SETUP — 3 values to fill in        ║
-       ╚══════════════════════════════════════════════╝
-
-  HOW TO SET UP (free — 200 emails/month, no backend needed):
-  1. Sign up at https://www.emailjs.com
-  2. Add an Email Service (Gmail works) → copy the Service ID
-  3. Create an Email Template with these variables:
-       From:    {{from_name}} <{{from_email}}>
-       Subject: {{subject}}
-       Body:    {{message}}
-     → copy the Template ID
-  4. Account → Public Key → copy it
-  5. Paste the three values into the constants below -->
-
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>
-    const EMAILJS_PUBLIC_KEY  = 'qxrA_0cVBbsmtqwAF';   // ← paste here
-    const EMAILJS_SERVICE_ID  = 'service_957lzzt';   // ← paste here
-    const EMAILJS_TEMPLATE_ID = 'template_p2aezo6';  // ← paste here
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxqFbQxe7cUMH43YczkVqY3eNypE3x-bwqzkcfar9ugtoKtatsrRJLrT1adBM7V4i3Qog/exec';
   </script>
 
   <style>
@@ -481,7 +463,7 @@
           <div class="section-label">Projects</div>
           <h2 class="section-title">Things I've Shipped</h2>
         </div>
-        <a href="https://github.com/brishavrajbahak" class="view-all" target="_blank">All Repos →</a>
+        <a href="https://github.com/Brishav9" class="view-all" target="_blank">All Repos →</a>
       </div>
       <div class="projects-grid">
 
@@ -542,7 +524,7 @@
           cares as much about the craft as the deadline? My terminal is always open.
           Send a message — I reply to every single one.</p>
           <div class="contact-links">
-            <a href="https://github.com/brishavrajbahak" class="contact-link-item" target="_blank">
+            <a href="https://github.com/Brishav9" class="contact-link-item" target="_blank">
               <div class="contact-link-icon"><img src="github.png" alt="GitHub"></div>
               <div class="contact-link-body"><div class="link-label">GitHub</div><div class="link-value">@Brishav9</div></div>
             </a>
@@ -593,7 +575,7 @@
         <div class="footer-logo">BR</div>
         <p class="footer-copy">© 2025 Brishav Rajbahak — engineered from Kathmandu, deployed worldwide.</p>
         <div class="footer-socials">
-          <a href="https://github.com/brishavrajbahak" class="social-btn" target="_blank"><img src="github.png" alt="GitHub"></a>
+          <a href="https://github.com/Brishav9" class="social-btn" target="_blank"><img src="github.png" alt="GitHub"></a>
           <a href="https://www.linkedin.com/in/brishav-rajbahak-854a30342" class="social-btn" target="_blank"><img src="linkedin.png" alt="LinkedIn"></a>
           <a href="https://www.instagram.com/razzbahakbrishav" class="social-btn" target="_blank"><img src="instagram-icon.png" alt="Instagram"></a>
         </div>
@@ -607,9 +589,6 @@
   </div>
 
   <script>
-    /* ── EmailJS init ── */
-    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
-
     /* ── Cursor ── */
     const dot = document.getElementById('cursor-dot');
     const ring = document.getElementById('cursor-ring');
@@ -695,23 +674,24 @@
       setTimeout(() => toast.classList.remove('show'), 5000);
     }
 
-    /* ── Contact form + EmailJS ── */
+    /* ── Contact form → Google Apps Script ── */
     document.getElementById('contactForm').addEventListener('submit', async function(e) {
       e.preventDefault();
-      if (EMAILJS_PUBLIC_KEY === 'YOUR_PUBLIC_KEY') {
-        showToast('⚠ Paste your EmailJS keys to go live!', 'error');
-        return;
-      }
       const btn = document.getElementById('submitBtn');
       const orig = btn.innerHTML;
       btn.textContent = 'Transmitting...';
       btn.disabled = true;
       try {
-        await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-          from_name:  this.from_name.value.trim(),
-          from_email: this.from_email.value.trim(),
-          subject:    this.subject.value.trim() || '(No subject)',
-          message:    this.message.value.trim(),
+        await fetch(APPS_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            from_name:  this.from_name.value.trim(),
+            from_email: this.from_email.value.trim(),
+            subject:    this.subject.value.trim() || '(No subject)',
+            message:    this.message.value.trim(),
+          }),
         });
         this.reset();
         showToast("Signal received. I'll be in touch soon.", 'success');
